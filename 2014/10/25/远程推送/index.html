@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>手把手教你做iOS推送 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="APNS的推送机制">
+<meta property="og:type" content="article">
+<meta property="og:title" content="手把手教你做iOS推送">
+<meta property="og:url" content="http://yoursite.com/2014/10/25/远程推送/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="APNS的推送机制">
+<meta property="og:updated_time" content="2015-11-04T12:09:24.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="手把手教你做iOS推送">
+<meta name="twitter:description" content="APNS的推送机制">
+  
+    <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img lazy-src="/psd.jpeg" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">John Doe</a></h1>
+		</hgroup>
+
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						<div class="icon-wrap icon-link hide" data-idx="2">
+							<div class="loopback_l"></div>
+							<div class="loopback_r"></div>
+						</div>
+						
+						
+						<div class="icon-wrap icon-me hide" data-idx="3">
+							<div class="user"></div>
+							<div class="shoulder"></div>
+						</div>
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>菜单</li>
+						<li>标签</li>
+						
+						<li>友情链接</li>
+						
+						
+						<li>关于我</li>
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="github" target="_blank" href="/#" title="github">github</a>
+					        
+								<a class="weibo" target="_blank" href="/#" title="weibo">weibo</a>
+					        
+								<a class="rss" target="_blank" href="/#" title="rss">rss</a>
+					        
+								<a class="zhihu" target="_blank" href="/#" title="zhihu">zhihu</a>
+					        
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/iOS编程/" style="font-size: 10px;">iOS编程</a> <a href="/tags/远程推送/" style="font-size: 10px;">远程推送</a>
+					</div>
+				</section>
+				
+				
+				
+				<section class="switch-part switch-part3">
+					<div id="js-friends">
+					
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.weibo.com/3265673473/profile?topnav=1&wvr=6">我的微博</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://onevcat.com">喵神的主页</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://wangzh.top">老坑</a>
+			        
+			        </div>
+				</section>
+				
+
+				
+				
+				<section class="switch-part switch-part4">
+				
+					<div id="js-aboutme">我是谁，我从哪里来，我到哪里去？我就是我，是颜色不一样的IT男…</div>
+				</section>
+				
+			</div>
+		</div>
+	</header>				
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">John Doe</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				<img lazy-src="/psd.jpeg" class="js-avatar">
+			</div>
+			<hgroup>
+			  <h1 class="header-author">John Doe</h1>
+			</hgroup>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="/#" title="github">github</a>
+			        
+						<a class="weibo" target="_blank" href="/#" title="weibo">weibo</a>
+			        
+						<a class="rss" target="_blank" href="/#" title="rss">rss</a>
+			        
+						<a class="zhihu" target="_blank" href="/#" title="zhihu">zhihu</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+      <div class="body-wrap"><article id="post-远程推送" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2014/10/25/远程推送/" class="article-date">
+  	<time datetime="2014-10-25T12:05:14.000Z" itemprop="datePublished">2014-10-25</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      手把手教你做iOS推送
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/远程推送/">远程推送</a></li></ul>
+	</div>
+
+        
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="APNS的推送机制">APNS的推送机制</h2><a id="more"></a>
+<p>首先我们看一下苹果官方给出的对iOS推送机制的解释。如下图</p>
+<p>Provider就是我们自己程序的后台服务器，APNS是Apple Push Notification Service的缩写，也就是苹果的推送服务器。</p>
+<p>上图可以分为三个阶段：</p>
+<p>第一阶段：应用程序的服务器端把要发送的消息、目的iPhone的标识打包，发给APNS。</p>
+<p>第二阶段：APNS在自身的已注册Push服务的iPhone列表中，查找有相应标识的iPhone，并把消息发送到iPhone。</p>
+<p>第三阶段：iPhone把发来的消息传递给相应的应用程序，并且按照设定弹出Push通知。</p>
+<p>APNS推送通知的详细工作流程</p>
+<p>下面这张图是说明APNS推送通知的详细工作流程：</p>
+<p>根据图片我们可以概括一下：</p>
+<p>1、应用程序注册APNS消息推送。</p>
+<p>2、iOS从APNS Server获取devicetoken，应用程序接收device token。</p>
+<p>3、应用程序将device token发送给程序的PUSH服务端程序。</p>
+<p>4、服务端程序向APNS服务发送消息。</p>
+<p>5、APNS服务将消息发送给iPhone应用程序。</p>
+<p>准备工作</p>
+<p>首先要有一台苹果的设备，模拟器是不支持推送的，所以你需要一台iphone，ipod touch或者ipad。</p>
+<p>我们的客户端与苹果服务器之间和我们自己的服务器与苹果服务器之间都需要证书来进行链接。下面我们来开始进入证书的制作过程。</p>
+<p>一 CSR文件</p>
+<p>首先我们要有生成一个Certificate Signing Request(也就是CSR)的请求文件。</p>
+<p>在应用程序里的使用工具中找到钥匙串访问。</p>
+<p>选择从证书颁发机构请求证书</p>
+<p>填上你的邮箱和常用名，常用名要记一下，一会会用到。然后选择保存到磁盘，继续</p>
+<p>保存位置在桌面，点击存储。</p>
+<p>到这里点击完成后我们会在桌面上看到一个CertificateSigningRequest.certSigningRequest的请求文件，也就是我们说的CSR文件。在我们生成CSR文件的同时，会在钥匙串访问中生成一对秘钥，名称为刚才我们填写的常用名</p>
+<p>二、下载开发证书和发布证书</p>
+<p>（这里我为了大家能看清楚，已经把之前的证书事先吊销了）</p>
+<p>到<a href="https://developer.apple.com/devcenter/ios/index.action" target="_blank" rel="external">https://developer.apple.com/devcenter/ios/index.action</a>  登录后,在右侧的ios Developer Program里点击iOS Provisioning Portal。</p>
+<p>进入下一级页面后在左侧选择Certificates</p>
+<p>点击红色的部分生成一个开发证书</p>
+<p>点击选择文件，选择刚才我们生成到桌面的CSR请求文件。注意，如果你在后面测试的时候出现了问题，请检查一下这里，这里的CSR请求文件必须是我们刚才生成的那个。</p>
+<p>选择完成后点击Submit提交</p>
+<p>提交完成后返回页面。页面会是这样的，然后我们刷新一下页面</p>
+<p>刷新后会出现一个下载按钮，我们点击下载。现在我们的开发证书已经配置并下载好了，发布证书的配置过程和开发证书是一致的，不再赘述。下载完后双击，会跳到钥匙串访问里。这就是我们之后要进行测的证书</p>
+<p>三 配置AppID，配置并下载SSL证书</p>
+<p>点击左侧的App IDs，找到我们要做推送功能的程序的id（如果没有的话要先New一个。注意，这里的App ID必须不能是通配的，通配的不可以做推送）。点击Configure</p>
+<p>进入后默认推送功能是关闭的，我们需要把推送功能打开</p>
+<p>选中打开后，点击右边灰色的Configure按钮</p>
+<p>这里的文件同样的，还是选择我们生成在桌面上的CSR请求文件</p>
+<p>然后点击继续</p>
+<p>出现了我们需要的SSL证书，我们点击下载后点击Done完成。</p>
+<p>Status状态变成了绿色可用了。这里右边的下载和上一步的下载是一样的，如果在上一步中下载了证书，便无需再次下载。此时我们有了一个名字叫aps_development.cer的SSL证书，同样，我们把他放在桌面。双击后会跳到钥匙串访问，出现我们的SSL推送证书。同样，发布的SSL证书的步骤也是一样的。</p>
+<p>四、下载Provisioning证书</p>
+<p>在左侧选择Provisioning</p>
+<p>配置好后点击提交（注意App ID要与我们刚的程序对应）</p>
+<p>之后变回出现下载按钮，我们点击下载。下载后双击，并将我们的设备上的描述文件更新一下（最好把之前的全部删除，然后再安装，防止出错）。</p>
+<p>五 从钥匙串访问中导出秘钥</p>
+<p>打开钥匙串访问，找到我们的专用秘钥（专用秘钥的名称就是我们在最开始生成CSR请求的时候填写的常用名）</p>
+<p>右键选择导出</p>
+<p>导出的文件名我们叫做Push</p>
+<p>在这里需要输入一个密码来对文件进行加密。这里我们选择abcabc，当然你也可以自己选择是什么，但是这个密码必须要铭记，切记！</p>
+<p>然后输入你电脑的密码，点击允许。这样我们就在桌面上生成了一个Push.p12文件。到此为止，我们在桌面上一共生成了三个文件。一个是CSR请求文件，一个是aps_development .cer的SSL证书文件，还有一个刚才生成的Push.p12秘钥文件。</p>
+<p>现在我们的准备工作已经做完了。要开始对生成的文件进行处理了。原因上面已经解释过，因为我们的服务链接苹果服务器也是需要证书的，但是我们直接生成的证书windows系统（我们一般的服务器都是win系统的）是不识别的，所以我们需要生成一个后缀为pem的带证书带秘钥的文件。</p>
+<p>六 处理证书</p>
+<p>下面我们打开终端（位置：应用程序à实用工具à终端）。</p>
+<p>cd到桌面，我们那三个文件所在的位置</p>
+<p>1、把.cer的SSL证书转换为.pem文件，执行命令：</p>
+<p>openssl x509 -in aps_development.cer -inform der -out PushChatCert.pem</p>
+<p>在桌面上会生成一个PushChatCert.pem文件</p>
+<p>2、把私钥Push.p12文件转化为.pem文件：</p>
+<p>openssl pkcs12 -nocerts -out PushChatKey.pem -in Push.p12</p>
+<p>这里需要我们输入密码，这个密码也就是我们导出p12文件时的密码，也就是我们上面设置的abcabc。然后，需要我们对生成的pem文件设置一个密语，这里我们推荐还是用上面这个abcabc,防止混乱（当然你也可以设置成别的更有意义的密语），这里的密语是要告诉我们服务器的。这样，桌面上又会生成一个PushChatKey.pem文件</p>
+<p>3、对生成的这两个pem文件再生成一个pem文件，来把证书和私钥整合到一个文件里：</p>
+<p>cat PushChatCert.pem PushChatKey.pem &gt; ck.pem<br>生成ck.pem文件</p>
+<p>这样，我们的文件就制作完了。下面进入测试阶段<br>为了测试证书是否工作，执行下面的命令：</p>
+<p>telnet gateway.sandbox.push.apple.com 2195<br>它将尝试发送一个规则的，不加密的连接到APNS服务。如果你看到上面的反馈，那说明你的MAC能够到达APNS。按下Ctrl+C关闭连接。如果得到一个错误信息，那么你需要确保你的防火墙允许2195端口。一般这里都不会出现什么问题。</p>
+<p>下面我们要使用我们生成的SSL证书和私钥来设置一个安全的链接去链接苹果服务器：</p>
+<p>openssl s_client -connect gateway.sandbox.push.apple.com:2195 -cert PushChatCert.pem -key PushChatKey.pem</p>
+<p>执行完这一句命令后需要我们输入密语</p>
+<p>Enter pass phrase for PushChatKey.pem:</p>
+<p>我们输入abcabc按回车</p>
+<p>你会看到一个完整的输出，让你明白OpenSSL在后台做什么。如果链接是成功的，你可以随便输入一个字符，按下回车，服务器就会断开链接，如果建立连接时有问题，OpenSSL会给你返回一个错误信息。</p>
+<p>当你在最后的时候你看到这样说明你已经成功了：</p>
+<p>CONNECTED(00000003)</p>
+<p>depth=1 /C=US/O=Entrust, Inc./OU=www.entrust.net/rpa isincorporated by reference/OU=(c) 2009 Entrust, Inc./CN=Entrust CertificationAuthority - L1C</p>
+<p>verify error:num=20:unable to get local issuercertificate</p>
+<p>verify return:0</p>
+<hr>
+<p>Certificate chain</p>
+<p>0s:/C=US/ST=California/L=Cupertino/O=Apple Inc./OU=iTMSEngineering/CN=gateway.sandbox.push.apple.com</p>
+<p>i:/C=US/O=Entrust, Inc./OU=www.entrust.net/rpa is incorporated byreference/OU=(c) 2009 Entrust, Inc./CN=Entrust Certification Authority - L1C</p>
+<p>1s:/C=US/O=Entrust, Inc./OU=www.entrust.net/rpa is incorporated byreference/OU=(c) 2009 Entrust, Inc./CN=Entrust Certification Authority - L1C</p>
+<p>i:/O=Entrust.net/OU=www.entrust.net/CPS_2048incorp. by ref. (limits liab.)/OU=(c) 1999 Entrust.net Limited/CN=Entrust.netCertification Authority (2048)</p>
+<hr>
+<p>Server certificate</p>
+<p>—–BEGIN CERTIFICATE—–</p>
+<p>MIIFGzCCBAOgAwIBAgIETBz90jANBgkqhkiG9w0BAQUFADCBsTELMAkGA1UEBhMC</p>
+<p>……省略……</p>
+<p>fMGbLqkGn8YogdPqe5T1</p>
+<p>—–END CERTIFICATE—–</p>
+<p>subject=/C=US/ST=California/L=Cupertino/O=AppleInc./OU=iTMS Engineering/CN=gateway.sandbox.push.apple.com</p>
+<p>issuer=/C=US/O=Entrust, Inc./OU=www.entrust.net/rpa isincorporated by reference/OU=(c) 2009 Entrust, Inc./CN=Entrust CertificationAuthority - L1C</p>
+<hr>
+<p>No client certificate CA names sent</p>
+<hr>
+<p>SSL handshake has read 2731 bytes and written 2165 bytes</p>
+<hr>
+<p>New, TLSv1/SSLv3, Cipher is AES256-SHA</p>
+<p>Server public key is 2048 bit</p>
+<p>Secure Renegotiation IS supported</p>
+<p>Compression: NONE</p>
+<p>Expansion: NONE</p>
+<p>SSL-Session:</p>
+<p>Protocol  : TLSv1</p>
+<p>Cipher    : AES256-SHA</p>
+<p>Session-ID:</p>
+<p>Session-ID-ctx:</p>
+<p>Master-Key:C7A47EED5E1F5……省略……369D4</p>
+<p>Key-Arg   : None</p>
+<p>Start Time:1361862882</p>
+<p>Timeout   : 300 (sec)</p>
+<p>Verify return code: 0 (ok)</p>
+<hr>
+<p>在这里提醒一下，也许你会看到像我这样的提示：verify error:num=20:unable to get local issuercertificate</p>
+<p>verify return:0</p>
+<p>其实是没问题的。</p>
+<p>七 项目测试</p>
+<p>建立我们的推送的项目（注意BundleIdentifier必须和我们推送应用的App id一致）</p>
+<p>在AppDelegate里didFinishLaunchingWithOptions函数里写</p>
+<ul>
+<li>(BOOL)application:(UIApplication <em>)applicationdidFinishLaunchingWithOptions:(NSDictionary </em>)launchOptions</li>
+</ul>
+<p>{</p>
+<p>……</p>
+<p>//推送的形式：标记，声音，提示</p>
+<p>[[UIApplication sharedApplication] registerForRemoteNotificationTypes: UIRemoteNotificationTypeBadge |UIRemoteNotificationTypeSound | UIRemoteNotificationTypeAlert];</p>
+<p>return YES;</p>
+<p>}</p>
+<ul>
+<li>(void)application:(UIApplication <em>)applicationdidRegisterForRemoteNotificationsWithDeviceToken:(NSData </em>)pToken {</li>
+</ul>
+<p>NSLog(@”regisger success:%@”,pToken);</p>
+<p>//注册成功，将deviceToken保存到应用服务器数据库中</p>
+<p>}</p>
+<ul>
+<li>(void)application:(UIApplication <em>)application didReceiveRemoteNotification:(NSDictionary </em>)userInfo{</li>
+</ul>
+<p>// 处理推送消息</p>
+<p>NSLog(@”userinfo:%@”,userInfo);</p>
+<p>NSLog(@”收到推送消息:%@”,[[userInfo objectForKey:@”aps”] objectForKey:@”alert”]);</p>
+<p>}</p>
+<ul>
+<li>(void)application:(UIApplication <em>)applicationdidFailToRegisterForRemoteNotificationsWithError:(NSError </em>)error {</li>
+</ul>
+<p>NSLog(@”Registfail%@”,error);</p>
+<p>}</p>
+<p>我们运行程序的时候会有提示，说我们的程序要发送推送通知。</p>
+<p>下面我们把php服务器代码和生成的ck.pem文件放在统一文件夹下面（这里我们还是统一放在桌面上）。</p>
+<p>用Xcode打开（其他工具也可以）php服务器端的代码，把deviceToken改成我们现在要进行测试的iphone的deviceToken（获得方法，：在Xcode的顶部工具栏点击windowàOrganizer，在左侧选中我们的iphone后，右边的Identifier后面的就是了），密语改成我们之前设置的abcabc。然后保存。</p>
+<p>然后在终端运行命令（如果刚才你关闭了终端的话，最好ls一下，看看当前是不是在桌面），执行命令：</p>
+<p>php pushMe.php</p>
+<p>然后回车（pushMe为服务器文件名称）</p>
+<p>如果出现这样的提示说明成功了，然后在iphone上，我们期待已久的推送消息终于来了。<br>以下是推送的几种效果：</p>
+<p>常见问题：</p>
+<p>1、在用证书和秘钥链接服务器时出现提示：</p>
+<p>Error opening client certificate private key filePushChatKey.pem</p>
+<p>20839:error:02001002:system library:fopen:No such file ordirectory:/SourceCache/OpenSSL098/OpenSSL098-44/src/crypto/bio/bss_file.c:356:fopen(‘PushChatKey.pem’,’r’)</p>
+<p>20839:error:20074002:BIO routines:FILE_CTRL:systemlib:/SourceCache/OpenSSL098/OpenSSL098-44/src/crypto/bio/bss_file.c:358:</p>
+<p>unable to load client certificate private key file </p>
+<p>解决：</p>
+<p>文件路径不对。cd到生成的pem文件路径下再进行链接</p>
+<p>2、前期测试没有问题，将ck.pem给服务器，通过服务器进行推送时推送不成功，提示链接APNS失败。</p>
+<p>解决：一，看一下证书的名称，密语是否正确；二，路径是否正确；然后检查一下库，OpenSSL和libssl；此外apache还要开启OpenSSL权限，确保可以访问pem</p>
+<p>3、APNS地址<br>测试地址gateway.sandbox.push.apple.com:2195<br>发布地址 gateway.push.apple.com:2195</p>
+<p>测试的地址用的是沙盒，发布地址是不同的。发布软件的时候记得改过来</p>
+<p>4、要注意顺序问题，一定要按照这个顺序来：</p>
+<p>生成钥匙串请求 –&gt;配置下载开发证书–&gt;  配置App ID ，配置、下载SSL证书–&gt;Provisioning证书</p>
+<p>5、多注意一下红色字体部分<br>在此感谢曾经为此而努力过的前辈们，尤其是感谢杨大哥的帮助。</p>
+<p>在这里附上杨大哥的帖子：<a href="http://www.cocoachina.com/bbs/read.php?tid=102110&amp;page=1" target="_blank" rel="external">http://www.cocoachina.com/bbs/read.php?tid=102110&amp;page=1</a></p>
+<p>另外附上几个关于推送的不错的帖子：<br><a href="http://zxs19861202.iteye.com/blog/1532460" target="_blank" rel="external">http://zxs19861202.iteye.com/blog/1532460</a><br>一篇很不错的帖子，老外写的<br><a href="http://www.raywenderlich.com/3443/apple-push-notification-services-tutorial-part-12" target="_blank" rel="external">http://www.raywenderlich.com/3443/apple-push-notification-services-tutorial-part-12</a><br>中文翻译<br><a href="http://article.ityran.com/archives/194" target="_blank" rel="external">http://article.ityran.com/archives/194</a></p>
+<p>在过程中如果有疑问可以新浪或腾讯微博@showhilllee虽然本人是菜鸟一个，也许不能为你把问题解决掉，但是会本着菜鸟精神去帮你解决</p>
+<p>php服务器代码  pushMe.php 2.zip (2 K)</p>
+<p>本文若有问题，欢迎大家斧正。</p>
+<p>原帖：<a href="http://www.cocoachina.com/bbs/read.php?tid=136377" target="_blank" rel="external">http://www.cocoachina.com/bbs/read.php?tid=136377</a></p>
+<p>作者博客：<a href="http://blog.csdn.net/showhilllee/article/details/8631734#comments" target="_blank" rel="external">http://blog.csdn.net/showhilllee/article/details/8631734#comments</a></p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2014/11/04/SDWebImage/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          SDWebImage的使用
+        
+      </div>
+    </a>
+  
+  
+</nav>
+
+  
+</article>
+
+
+<div class="share">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">分享到：</span>
+		<a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+		<a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="远程推送" data-title="手把手教你做iOS推送" data-url="http://yoursite.com/2014/10/25/远程推送/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"true"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2015 John Doe
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+
+
+<script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: true,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false
+	}
+</script>
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js" type="text/javascript"></script>
+<script src="/js/main.js" type="text/javascript"></script>
+
+
+
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  </div>
+</body>
+</html>
